@@ -13,16 +13,26 @@ if (command == 'add') {
     var note = notes.addNode(argv.title, argv.body);
     if (note != null) {
         console.log('note added');
-        console.log('----');
-        console.log(`Title: ${note.title}`);xw
-        console.log(`Body: ${note.body}`);
+        notes.logNote(note);
     } else {
         console.log('can not add note');
     }
 } else if (command == 'list') {
-    notes.getAll();
+    var allNotes = notes.getAll();
+    if (allNotes.length === 0) {
+        console.log('there is no note');
+    } else {
+        console.log(`there are ${allNotes.length} notes`);
+        allNotes.forEach(notes.logNote);
+    }
 } else if (command == 'read') {
-    notes.getNode(argv.title);
+    var note = notes.getNode(argv.title);
+    if (note != null) {
+        console.log(`got found`);
+        notes.logNote(note);
+    } else {
+        console.log('note not found');
+    }
 } else if (command == 'remove') {
     var ret = notes.removeNote(argv.title);
     if (ret) {
