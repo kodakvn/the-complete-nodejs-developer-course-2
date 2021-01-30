@@ -2,28 +2,34 @@ console.log('starting node.js');
 
 const fs = require('fs');
 
+var fetchNotes = () => {
+    try {
+        var notesString = fs.readFileSync('notes-data.json');
+        return JSON.parse(notesString);
+    } catch (e) {
+        console.log('there is an error when read json file');
+    }
+    return [];
+};
+
+var saveNotes = (notes) => {
+    fs.writeFileSync('notes-data.json', JSON.stringify(notes));
+};
+
 var addNode = (title, body) => {
-    var notes = [];
+    var notes = fetchNotes();
     var note = {
         title,
         body
     };
-
-    try {
-        var notesString = fs.readFileSync('notes-data.json');
-        notes = JSON.parse(notesString);
-    } catch (e) {
-        console.log('there is an error when read json file');
-    }
-
     var duplicateNotes = notes.filter((note) => note.title === title);
 
     if (duplicateNotes.length === 0) {
         notes.push(note);
-        fs.writeFileSync('notes-data.json', JSON.stringify(notes));
-    } else {
-        console.log('can not add note, duplicate!');
+        saveNotes(notes);
+        return note;
     }
+    return null;
 };
 
 var getAll = () => {
