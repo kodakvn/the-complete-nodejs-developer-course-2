@@ -1,6 +1,7 @@
 console.log('starting node.js');
 
 const fs = require('fs');
+const { filter } = require('lodash');
 
 var fetchNotes = () => {
     try {
@@ -15,6 +16,13 @@ var fetchNotes = () => {
 var saveNotes = (notes) => {
     fs.writeFileSync('notes-data.json', JSON.stringify(notes));
 };
+
+var removeNote = (title) => {
+    var notes = fetchNotes();
+    var filteredNotes = notes.filter((note) => note.title !== title);
+    saveNotes(filteredNotes);
+    return notes.length !== filteredNotes.length;
+}
 
 var addNode = (title, body) => {
     var notes = fetchNotes();
@@ -40,13 +48,9 @@ var getNode = (title) => {
     console.log('read note', title);
 };
 
-var remoteNote = (title) => {
-    console.log('remove note', title);
-};
-
 module.exports = {
     addNode,
     getAll,
     getNode,
-    remoteNote
+    removeNote
 };

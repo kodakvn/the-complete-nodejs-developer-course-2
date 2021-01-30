@@ -14,7 +14,7 @@ if (command == 'add') {
     if (note != null) {
         console.log('note added');
         console.log('----');
-        console.log(`Title: ${note.title}`);
+        console.log(`Title: ${note.title}`);xw
         console.log(`Body: ${note.body}`);
     } else {
         console.log('can not add note');
@@ -24,7 +24,12 @@ if (command == 'add') {
 } else if (command == 'read') {
     notes.getNode(argv.title);
 } else if (command == 'remove') {
-    notes.remoteNote(argv.title);
+    var ret = notes.removeNote(argv.title);
+    if (ret) {
+        console.log('note removed!');
+    } else {
+        console.log('note not found');
+    }
 } else {
     console.log('Command not recognized');
 }
