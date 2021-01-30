@@ -2,24 +2,10 @@ console.log('starting app.js');
 
 const fs = require('fs');
 const os = require('os');
+const _ = require('lodash');
 const notes = require('./notes.js');
 
-var userInfo = os.userInfo();
-
-// #1
-// fs.appendFile('greetings.txt', `hello ${userInfo.username}! You are ${notes.age}`, function (err) {
-//     if (err) {
-//         console.log('unable to write file');
-//     }
-// });
-
-// #2
-// fs.appendFileSync('greetings.txt', 'hello world new');
-
-// #10 - export function
-// var res = notes.addNode();
-// console.log(res);
-
-// #10 - challenge: add function
-var sum = notes.addNode(10, -2);
-console.log(sum);
+// console.log(_.isString(true));
+// console.log(_.isString('kodakvn'));
+var filterredArray = _.uniq(['kodak', 1, 'kodak', 1, 2, 3, 4]);
+console.log(filterredArray);
