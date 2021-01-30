@@ -17,5 +17,9 @@ var userInfo = os.userInfo();
 // fs.appendFileSync('greetings.txt', 'hello world new');
 
 // #10 - export function
-var res = notes.addNode();
-console.log(res);
+// var res = notes.addNode();
+// console.log(res);
+
+// #10 - challenge: add function
+var sum = notes.addNode(10, -2);
+console.log(sum);
